@@ -232,62 +232,126 @@ Return optimized circuit layout
 </ul>
 
 <h3>Example Code for Traveling Salesman Problem (TSP) in Python</h3>
-
-<pre><code>
+<p>It's just a sample code example - you can explore the real used implementation in 'src' folder</p>
+<pre><code class="language-python">
 import math
 import random
 
-# Function to calculate the Euclidean distance between two cities
-def distance(city1, city2):
-    return math.sqrt((city2[0] - city1[0])**2 + (city2[1] - city1[1])**2)
+class TSP:
+    def __init__(self, cities, initial_temp, cooling_rate):
+        """
+        Initialize the TSP solver with cities, initial temperature, and cooling rate.
 
-# Calculate the total distance of a given route
-def route_distance(route):
-    total_distance = 0
-    for i in range(len(route) - 1):
-        total_distance += distance(route[i], route[i + 1])
-    total_distance += distance(route[-1], route[0])  # Return to the starting city
-    return total_distance
+        Parameters:
+        - cities: List of (x, y) coordinates representing cities.
+        - initial_temp: Initial temperature for the Simulated Annealing process.
+        - cooling_rate: The rate at which the temperature cools down.
+        """
+        self.cities = cities
+        self.initial_temp = initial_temp
+        self.cooling_rate = cooling_rate
 
-# Simulated Annealing function to find the shortest route
-def simulated_annealing(cities, initial_temp, cooling_rate):
-    # Start with a random initial route
-    current_route = cities[:]
-    random.shuffle(current_route)
-    current_temp = initial_temp
-    best_route = current_route
-    best_distance = route_distance(best_route)
+    @staticmethod
+    def calculate_distance(city1, city2):
+        """Calculate the Euclidean distance between two cities."""
+        return math.sqrt((city2[0] - city1[0])**2 + (city2[1] - city1[1])**2)
 
-    while current_temp > 1:
-        # Create a new route by swapping two cities
-        new_route = current_route[:]
-        i, j = random.sample(range(len(cities)), 2)
-        new_route[i], new_route[j] = new_route[j], new_route[i]
+    def route_distance(self, route):
+        """Calculate the total distance of a given route (order of cities)."""
+        total_distance = 0
+        for i in range(len(route) - 1):
+            total_distance += self.calculate_distance(route[i], route[i + 1])
+        total_distance += self.calculate_distance(route[-1], route[0])  # Return to the starting city
+        return total_distance
 
-        # Calculate the distances of the current and new routes
-        current_distance = route_distance(current_route)
-        new_distance = route_distance(new_route)
-        
-        # Accept the new route based on Simulated Annealing criteria
-        if new_distance < current_distance or random.random() < math.exp((current_distance - new_distance) / current_temp):
-            current_route = new_route
-            current_distance = new_distance
-            if new_distance < best_distance:
-                best_route = new_route
-                best_distance = new_distance
+    def simulated_annealing(self):
+        """Simulated Annealing algorithm to find the shortest route."""
+        current_route = self.cities[:]
+        random.shuffle(current_route)
+        current_temp = self.initial_temp
+        best_route = current_route
+        best_distance = self.route_distance(best_route)
+        iterations = 0
 
-        # Gradually reduce the temperature
-        current_temp *= cooling_rate
+        while current_temp > 1:
+            iterations += 1
+            # Create a new route by swapping two cities
+            new_route = current_route[:]
+            i, j = random.sample(range(len(self.cities)), 2)
+            new_route[i], new_route[j] = new_route[j], new_route[i]
 
-    return best_route, best_distance
+            # Calculate the distance of the current and new routes
+            current_distance = self.route_distance(current_route)
+            new_distance = self.route_distance(new_route)
 
-# Define the cities as coordinates (randomly generated for example purposes)
-cities = [(random.randint(0, 100), random.randint(0, 100)) for _ in range(10)]
+            # Decide to accept the new route based on temperature
+            if new_distance < current_distance or random.random() < math.exp((current_distance - new_distance) / current_temp):
+                current_route = new_route
+                current_distance = new_distance
+                if new_distance < best_distance:
+                    best_route = new_route
+                    best_distance = new_distance
 
-# Run the Simulated Annealing algorithm
-best_route, best_distance = simulated_annealing(cities, initial_temp=10000, cooling_rate=0.99)
+            # Gradually reduce the temperature
+            current_temp *= self.cooling_rate
 
-print("Best route found:", best_route)
-print("Total distance of the best route:", best_distance)
+        return best_route, best_distance, iterations
 </code></pre>
-// research & problems & results
+
+<h2>Research & Problems & Experiments Results</h2>
+<p>During the implementation testing, which you can find in the 'src' folder of this repository, we used three different configuration setups to explore the impact of various algorithm settings on performance.</p>
+
+<div style="display: flex; flex-direction: column; gap: 20px;">
+
+<div>
+<h3>Testing Case 1: Baseline Setup</h3>
+  <ul>
+    <li><b>Provided Configurations</b>: 10 cities, 10000 initial temperature, 0.99 cooling rate</li>
+    <li><b>Results</b>:</li>
+    <ul>
+      <li><b>Best Route Found</b>: [(34, 46), (25, 3), (33, 12), (38, 55), (56, 69), (70, 76), (77, 75), (93, 98), (56, 87), (37, 57)]</li>
+      <li><b>Total Distance of Best Route</b>: 258.32</li>
+      <li><b>Iterations</b>: 917</li>
+      <li><b>Execution Time</b>: 0.0126 seconds</li>
+    </ul>
+    <p>In this setup, with a moderate initial temperature and cooling rate, the algorithm found a relatively short route. The algorithm took 917 iterations to converge, balancing exploration and convergence. This resulted in a good-quality solution (short distance) within a reasonable execution time. This baseline provides a point of comparison for other configurations, showing how moderate settings impact both solution quality and speed.</p>
+</div>
+
+<div>
+<h3>Testing Case 2: Faster Cooling Rate</h3>
+  <ul>
+    <li><b>Provided Configurations</b>: 10 cities, 10000 initial temperature, 0.95 cooling rate</li>
+    <li><b>Results</b>:</li>
+    <ul>
+      <li><b>Best Route Found</b>: [(84, 88), (92, 81), (100, 78), (86, 37), (63, 8), (58, 45), (38, 12), (31, 29), (11, 91), (55, 74)]</li>
+      <li><b>Total Distance of Best Route</b>: 338.34</li>
+      <li><b>Iterations</b>: 180</li>
+      <li><b>Execution Time</b>: 0.0024 seconds</li>
+    </ul>
+    <p>With a faster cooling rate, the algorithm reduced its temperature quickly, leading it to converge in only 180 iterations. This caused it to find a longer route (higher distance) compared to the baseline, indicating that it likely settled for a less optimal solution because it didn’t explore as many options. However, the faster cooling did make the execution time shorter (almost five times faster than the baseline), which could be beneficial when speed is prioritized over finding the absolute best solution.</p>
+</div>
+
+<div>
+<h3>Testing Case 3: Higher Initial Temperature and Slower Cooling</h3>
+  <ul>
+    <li><b>Provided Configurations</b>: 10 cities, 20000 initial temperature, 0.995 cooling rate</li>
+    <li><b>Results</b>:</li>
+    <ul>
+      <li><b>Best Route Found</b>: [(100, 15), (94, 36), (78, 35), (70, 82), (42, 94), (27, 58), (17, 49), (20, 5), (57, 38), (75, 25)]</li>
+      <li><b>Total Distance of Best Route</b>: 311.27</li>
+      <li><b>Iterations</b>: 1976</li>
+      <li><b>Execution Time</b>: 0.0259 seconds</li>
+    </ul>
+    <p>With a higher initial temperature and slower cooling rate, the algorithm explored many more route options, taking 1976 iterations to find a solution. This resulted in a solution with a slightly shorter distance than Testing Case 2, but not as short as the baseline solution. The execution time was longer, as expected, due to the extended number of iterations. This configuration shows that increasing exploration time can improve the solution quality, but the results may not be as efficient as a balanced setup (like the baseline).</p>
+</div>
+
+</div>
+
+<h3>Summary of Findings</h3>
+<ul>
+  <li><b>Quality vs. Speed Trade-off</b>: Testing Case 2 was the fastest but resulted in a poorer solution due to the quick convergence. Testing Case 3, with a slower cooling rate, took the longest but didn’t produce the best route distance, suggesting that more iterations don’t always guarantee the best solution.</li>
+  <li><b>Balanced Configuration</b>: The baseline (Testing Case 1) struck a good balance between quality and speed, offering a short route distance without excessive computation time.</li>
+  <li><b>Temperature and Cooling Rate Impact</b>: Higher initial temperatures and slower cooling rates increase exploration but also require more iterations and time. Lower cooling rates speed up convergence, but they risk finding suboptimal solutions.</li>
+</ul>
+
+<p>These results show how adjusting the initial temperature and cooling rate can affect both the <b>quality of the route found</b> and the <b>speed of the algorithm</b>. For real-world applications, this balance between solution quality and runtime could be adjusted depending on the importance of speed versus accuracy.</p>
