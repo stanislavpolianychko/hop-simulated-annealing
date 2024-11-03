@@ -40,18 +40,17 @@ Return best solution found
 <h2>Used Sources and Real World Problems Solved with SA (TSP)</h2>
 <h3>Used Sources</h3>
 <ul>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
-  <li><a href="https://www.sciencedirect.com/science/article/pii/S1877050919303667">ScienceDirect - Simulated Annealing Algorithm: A Review</a></li>
+  <li><a href="https://projecteuclid.org/journals/statistical-science/volume-8/issue-1/Simulated-Annealing/10.1214/ss/1177011077.full">Simulated Annealing from Dimitris Bertsimas, John Tsitsiklis (Base SA explanations)</a></li>
+  <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0743731596901215">Parallel Simulated Annealing Algorithms from D.Janaki Ram 1, T.H. Sreenivas, K.Ganapathy Subramaniam (SA algorithms types)</a></li>
+  <li><a href="https://www.sciencedirect.com/science/article/pii/089571779390204C">Simulated annealing: Practice versus theory from L. Ingber (SA real world usage)</a></li>
+  <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0377221704005892">Using simulated annealing to optimize the feature selection problem in marketing applications from Ronen Meiri (Appliable usage of SA algorithm)</a></li>
+  <li><a href="http://seor.vse.gmu.edu/~khoffman/TSP_Hoffman_Padberg_Rinaldi.pdf">Traveling salesman problem from Karla L. Hoffman, Manfred Padberg, Giovanni Rinaldi (TSP solving well described here)</a></li>
+  <li><a href="https://dl.acm.org/doi/abs/10.5555/1882757.1882790">Simulated annealing techniques from Albert Y. Zomaya, Rick Kazman (Different optimisation techniques using SA)</a></li>
+  <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0377221704005892">Using simulated annealing to optimize the feature selection problem in marketing applications from Ronen Meiri, Jacob Zahavi</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Simulated_annealing">Simulated annealing by Wikipedia (Good as a visualisations source)</a></li>
+  <li><a href="https://ieeexplore.ieee.org/document/1176334">A modified simulated annealing method for flexible job shop scheduling problem from N.M. Najid, S. Dauzere-Peres, A. Zaidat</a></li>
+  <li><a href="https://ieeexplore.ieee.org/document/1176334">Resource allocation in cloud using simulated annealing from Diptangshu Pandit, Samiran Chattopadhyay, Matangini Chattopadhyay, Nabendu Chaki</a></li>
+  <li><a href="https://cdn.intechopen.com/pdfs/40127/InTech-A_simulated_annealing_based_approach_to_integrated_circuit_layout_design.pdf">A Simulated Annealing Based Approach to Integrated Circuit Layout Design from Yiqiang Sheng, Atsushi Takahashi</a></li>
 </ul>
 
 <h3>Real World Problems Solved with SA</h3>
